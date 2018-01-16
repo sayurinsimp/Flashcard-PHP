@@ -1,13 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-    <title>Flashcards-PHP</title>
-</head>
-<body>
+<?php 
+    require('./config/config.php');
     
-</body>
-</html>
+    $stmt = $pdo->query("SELECT * FROM `flashcard_set`");
+
+?>
+<?php include('./inc/header.php'); ?>
+
+    <h1>Flashcard List</h1>
+    <ul>
+        <?php 
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                echo '<li><a href="set.php?set_id=' . $row['set_id'] . '">' . $row['set_name'] . '</a></li>';
+            }
+        ?>
+    </ul>
+
+<?php include('./inc/footer.php'); ?>
