@@ -10,13 +10,14 @@
 ?>
 
 <?php include('./inc/header.php'); ?>
+
     <div class="container">
-        <h1 class="title">Viewing <span><?php echo $setName; ?><span> Set</h1>
+        <h1 class="title">Viewing <span><?php echo $setName; ?></span> Set</h1>
         <div class="cards">
             <?php foreach($cards as $card): ?>
             <div class="card">
-                <div class="card__delete">
-                    <a href="edit.php?card_id=<?php echo $card['card_id']; ?>">Edit</a>
+                <div class="card__edit">
+                    <a href="edit.php?set_id=<?php echo $set_id; ?>&amp;card_id=<?php echo $card['card_id']; ?>">Edit</a>
                 </div>
                 <div class="card-body text-center">
                     <p class="card-text question"><?php echo $card['question']; ?></p>
@@ -27,7 +28,7 @@
             <?php endforeach; ?>
         </div>
         <div class="my-3">
-            <a href="add.php?set_id=<?php echo $id; ?>" class="add-btn btn btn-secondary">Add Card</a>
+            <a href="add.php?set_id=<?php echo $set_id; ?>" class="add-btn btn btn-secondary">Add Card</a>
         </div>
     </div>
 

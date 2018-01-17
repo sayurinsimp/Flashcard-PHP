@@ -2,14 +2,14 @@
     position: relative;
 }
 
-.card__delete {
+.card__edit {
     position: absolute;
     top: 5px;
     right: 10px;
     font-size: .88rem;
 }
 
-.card__delete a {
+.card__edit a {
     display: block;
     display: flex;
     justify-content: center;
