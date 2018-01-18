@@ -11,4 +11,5 @@
 <body>
 <nav>
     <a href="index.php" class="btn btn-dark">Home</a>
+    <a href="new-set.php" class="btn btn-info">Make New Set</a>
 </nav>

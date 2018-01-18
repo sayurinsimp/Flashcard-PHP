@@ -3,9 +3,7 @@
     require('./config/query.php');
 
     // Get flashcard info
-    $sql = "SELECT * FROM `$setName`";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$setName]);
+    $stmt = $pdo->query("SELECT * FROM `$setName`");
     $cards = $stmt->fetchAll();
 ?>
 

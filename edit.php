@@ -11,6 +11,7 @@
 
     $msg = '';
 
+    // Update card on submit
     if (isset($_POST['submit'])) {
         $question = htmlspecialchars($_POST['question']);
         $answer = htmlspecialchars($_POST['answer']);
@@ -25,6 +26,7 @@
         }
     }
 
+    // Delete card on submit
     if (isset($_POST['delete'])) {
         $sql = "DELETE FROM `$setName` WHERE card_id = ?";
         $stmt = $pdo->prepare($sql);
