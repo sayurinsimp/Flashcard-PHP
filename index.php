@@ -5,14 +5,13 @@
 
 ?>
 <?php include('./inc/header.php'); ?>
-
-        <h1>Flashcard List</h1>
-        <ul>
-            <?php 
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    echo '<li><a href="set.php?set_id=' . $row['set_id'] . '">' . $row['set_name'] . '</a></li>';
-                }
-            ?>
-        </ul>
-
+    <h1 class="text-center">Flashcard List</h1>
+    <div class="list-group">
+        <?php 
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                echo '<a class="list-group-item list-group-item-action" href="set.php?set_id=' . $row['set_id'] . '">' . $row['set_name'] . '</a>';
+            }
+        ?>
+    </div>
+    
 <?php include('./inc/footer.php'); ?>

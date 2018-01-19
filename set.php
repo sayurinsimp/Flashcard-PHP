@@ -25,6 +25,7 @@
         <?php endforeach; ?>
     </div>
     <div class="my-3">
+        <a href="new-set.php?set_id=<?php echo $set_id; ?>" class="add-btn btn btn-secondary">Edit Set Name</a>
         <a href="add.php?set_id=<?php echo $set_id; ?>" class="add-btn btn btn-secondary">Add Card</a>
         <?php include('./inc/modal.php'); ?>
     </div>
