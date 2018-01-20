@@ -1,7 +1,9 @@
 <?php 
     require('./config/config.php');
+    require('./config/functions.php');
     $pageTitle = "Make New Set";
     $href = "index.php";
+
     // If set_id exist, set name is being edited
     if (isset($_GET['set_id'])) {
         require('./config/query.php');
@@ -12,28 +14,27 @@
     if (isset($_POST['submit'])) {
         $posted_set_name = htmlspecialchars($_POST['set_name']);
         if (!empty($posted_set_name)) {
+            // Card Set is being edited
             if (isset($_GET['set_id'])) {
                 $sql = "RENAME TABLE `$setName` TO `$posted_set_name`";
-                $stmt = $pdo->prepare($sql);
-                $stmt->execute();
+                prepareAndExecute($sql, array());
 
                 $sql = "UPDATE flashcard_set SET set_name = ? WHERE set_id = ?";
-                $stmt = $pdo->prepare($sql);
-                $stmt->execute([$posted_set_name, $set_id]);
+                prepareAndExecute($sql, array($posted_set_name, $set_id));
                 header('Location: ' . 'index.php' . '');
 
 
-            } else {
+            } 
+            // This is a new card set
+            else { 
                 $sql = "INSERT INTO flashcard_set(set_name) VALUES(?)";
-                $stmt = $pdo->prepare($sql);
-                $stmt->execute([$posted_set_name]);
+                prepareAndExecute($sql, array($posted_set_name));
 
                 $sql ="CREATE TABLE `$posted_set_name`(
                 card_id INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
                 question VARCHAR( 150 ) NOT NULL, 
-                answer VARCHAR( 150 ) NOT NULL);" ;
-                $stmt = $pdo->prepare($sql);
-                $stmt->execute();
+                answer VARCHAR( 150 ) NOT NULL);";
+                prepareAndExecute($sql, array());
                 header('Location: ' . 'index.php' . '');
             }
             

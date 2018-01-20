@@ -14,7 +14,7 @@
         <?php foreach($cards as $card): ?>
         <div class="card">
             <div class="card__edit">
-                <a href="edit.php?set_id=<?php echo $set_id; ?>&amp;card_id=<?php echo $card['card_id']; ?>">Edit</a>
+                <a href="add-edit.php?set_id=<?php echo $set_id; ?>&amp;card_id=<?php echo $card['card_id']; ?>">Edit</a>
             </div>
             <div class="card-body text-center">
                 <p class="card-text question"><?php echo $card['question']; ?></p>
@@ -26,7 +26,7 @@
     </div>
     <div class="my-3">
         <a href="new-set.php?set_id=<?php echo $set_id; ?>" class="add-btn btn btn-secondary">Edit Set Name</a>
-        <a href="add.php?set_id=<?php echo $set_id; ?>" class="add-btn btn btn-secondary">Add Card</a>
+        <a href="add-edit.php?set_id=<?php echo $set_id; ?>" class="add-btn btn btn-secondary">Add Card</a>
         <?php include('./inc/modal.php'); ?>
     </div>
 
