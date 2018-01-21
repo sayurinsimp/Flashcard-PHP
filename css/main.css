@@ -1,20 +1,5 @@
-.card {
-    position: relative;
+.flashcard-list {
+    max-width: 540px;
+    margin: auto;
 }
 
-.card__edit {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    font-size: .88rem;
-}
-
-.card__edit a {
-    display: block;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 35px;
-    height: 35px;
-    color: inherit;
-}

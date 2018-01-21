@@ -8,8 +8,12 @@
 ?>
 
 <?php include('./inc/header.php'); ?>
-
-    <h1 class="title">Viewing <span><?php echo $setName; ?></span> Set</h1>
+    <div class="text-center mt-2 mb-3">
+        <h1 class="set-title">
+            <?php echo $setName; ?>
+        </h1>
+        <a href="new-set.php?set_id=<?php echo $set_id; ?>" class="add-btn btn btn-outline-secondary mt-3">Edit Set Name</a>
+    </div>
     <div class="cards">
         <?php foreach($cards as $card): ?>
         <div class="card">
@@ -23,10 +27,11 @@
             </div>
         </div>
         <?php endforeach; ?>
+        <div class="card add-card">
+            <a href="add-edit.php?set_id=<?php echo $set_id; ?>" class="add-btn btn btn-secondary">Add Card</a>
+        </div>
     </div>
     <div class="my-3">
-        <a href="new-set.php?set_id=<?php echo $set_id; ?>" class="add-btn btn btn-secondary">Edit Set Name</a>
-        <a href="add-edit.php?set_id=<?php echo $set_id; ?>" class="add-btn btn btn-secondary">Add Card</a>
         <?php include('./inc/modal.php'); ?>
     </div>
 

@@ -1,4 +1,23 @@
 	</div>
+	<footer class="footer bg-dark">
+      <div class="container text-white">
+        <span class="footer-content">
+			<p class="footer-content__name">Xavier Trinidad 2018</p>
+			<ul class="footer-content__list">
+				<li>
+					<a href="#">
+						<i class="fa fa-envelope-o" aria-hidden="true"></i>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="fa fa-github" aria-hidden="true"></i>
+					</a>
+				</li>
+			</ul>
+		</span>
+      </div>
+    </footer>
 	<script
 				src="https://code.jquery.com/jquery-3.2.1.min.js"
 				integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="

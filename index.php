@@ -6,7 +6,7 @@
 
 <?php include('./inc/header.php'); ?>
     <h1 class="text-center">Flashcard List</h1>
-    <div class="list-group">
+    <div class="list-group flashcard-list">
         <?php foreach ($sets as $set): ?>
             <a href="set.php?set_id=<?php echo $set['set_id']; ?>" class="list-group-item list-group-item-action"><?php  echo $set['set_name']; ?></a>
         <?php endforeach; ?>
