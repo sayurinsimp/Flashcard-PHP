@@ -2,8 +2,8 @@
     require('./config/config.php');
     $stmt = $pdo->query("SELECT * FROM flashcard_set");
     $sets = $stmt->fetchAll();
-
 ?>
+
 <?php include('./inc/header.php'); ?>
     <h1 class="text-center">Flashcard List</h1>
     <div class="list-group">

@@ -9,6 +9,9 @@ An overview of basic PDO features can be found from [Traversy Media](https://www
 [What is PDO?](#what-is-pdo)             
 [Initial Database Setup with phpMyAdmin](#initial-database-setup-with-phpmyadmin)       
 [PDO Project Set Up](#pdo-project-set-up)       
+[PDO Query](#pdo-query)       
+[Prepared Statements](#prepared-statements)                 
+[CRUD Examples](#crud-examples)                 
 
 ## Goals
 
@@ -117,8 +120,134 @@ $pdo = new PDO($dsn, $user, $password);
 
 This *config.php* file is included in any other file that uses PDO.
 
+## PDO Query
 
+[PDO query](http://php.net/manual/en/pdo.query.php) is one of two ways of making queries.  The PDO *query()* method should only be used if there is no type of variable or user input that is determining the query.
 
+In **index.php**, all the flashcard sets available in the database are presented in a list.  To get the data, a query is performed and then [*fetchAll()*](http://php.net/manual/en/pdostatement.fetchall.php) is used to turn the data into an array:
 
+```php
+<?php 
+    require('./config/config.php');
+    $stmt = $pdo->query("SELECT * FROM flashcard_set");
+    $sets = $stmt->fetchAll();
+?>
+```
 
-    
+Using a [foreach](http://php.net/manual/en/control-structures.foreach.php) loop, the data can be presented using HTML:
+
+```php
+<?php foreach ($sets as $set): ?>
+    <a href="set.php?set_id=<?php echo $set['set_id']; ?>" class="list-group-item list-group-item-action"><?php  echo $set['set_name']; ?></a>
+<?php endforeach; ?>
+```
+
+**NOTE** PDO *fetch()* and *fetchAll()* has a ```fetch_style``` parameter that determines how the data will be returned.  If no argument is provided, it defaults to *PDO::FETCH_BOTH*.  More information about fetch() options can be found [here](http://php.net/manual/en/pdostatement.fetch.php)
+
+## Prepared Statements
+
+The 2nd way to query a database is through the use of prepared statements, which should be used when a query involves any type of user input, be inside the web URL or from a form.  The two main methods involved with prepared statements are ```prepare()``` and ```execute()```.
+
+Before getting into prepared statements, below is an example taken from [PHP The Right Way](http://www.phptherightway.com/#pdo_extension) that demonstrates the wrong way of querying a database where user input is involved:
+```php
+$pdo->query("SELECT name FROM users WHERE id = " . $_GET['id']); // <-- NO!
+```
+
+```$_GET['id']``` is where the problem is because it's a raw query parameter that gets the id parameter from the URL.  If a query is made in this way, the application's database is vulnerable to SQL Injection, which can destroy the entire database.
+
+The solution is prepared statements, where either named or positional placeholders are used in place of raw query parameters.
+
+**Named Parameters:**       
+```php
+$stmt = $pdo->prepare('SELECT name FROM users WHERE id = :id');
+$id = htmlspecialchars($_GET['id']);
+$stmt->execute(['id' => $id]); // variable goes into array
+```
+
+**Positional Parameters:**       
+```php
+$stmt = $pdo->prepare('SELECT name FROM users WHERE id = ?');
+$id = htmlspecialchars($_GET['id']);
+$stmt->execute([$id]); // variable goes into array
+```
+
+## CRUD Examples
+
+Below are examples of CRUD features implemented in this application.  Most of the examles user the *prepareAndExecute()* function I created to perform the routine tasks for preparing the SQL and executing it along with the array of variables inserted into the placeholders (if there are any).
+
+```php
+<?php
+function prepareAndExecute($sql, $statements, $fetchType = '') {
+    require('./config/config.php');
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($statements);
+    if ($fetchType === 'fetch') {
+        return $stmt->fetch();
+    } else if ($fetchType === 'fetchAll') {
+        return $stmt->fetchAll();
+    } else {
+        ;
+    }
+}
+```
+
+### Create a table
+
+*General information about creating a table using PHP and SQL can be found [here](https://www.w3schools.com/php/php_mysql_create_table.asp)*
+
+When clicking the *New Set* link, the application is directed to **new-set.php** where a new flashcard set can be created:
+```php
+$sql ="CREATE TABLE `$posted_set_name`(
+    card_id INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
+    question VARCHAR( 150 ) NOT NULL, 
+    answer VARCHAR( 150 ) NOT NULL);";
+    prepareAndExecute($sql, array());
+    header('Location: ' . 'index.php' . ''); // Redirect to home page after set created
+```
+
+There is more logic attached to this (like checking if the Set Name field is empty), but I just wanted to show an example of creating a table and the **Create** part of CRUD.
+
+### Read data using fetch() and fetchAll()
+
+An example of **reading** data was shown earlier using fetchAll().  Another example of using fetch() along with prepared statements can be found when editing a card within a flashcard set:
+```php
+// Check if page loaded is a card edit
+if (isset($_GET['card_id'])) {
+    $card_id = htmlspecialchars($_GET['card_id']);
+    $sql = "SELECT * FROM `$setName` WHERE card_id = ?";
+    $card = prepareAndExecute($sql, array($card_id), 'fetch');
+}
+```
+
+In this example, first there is a check to see if ```card_id``` is set within the URL parameter.  The reason for this is because the page that edits a card is the same page loaded when adding a new card.  If ```card_id``` is set, then a card is being edited and information about that card should be presented in the input values.
+
+Next, ```$card_id``` is set to the value in the URL using $_GET.  This value will be used in the prepared statement later.
+
+The SQL statement is created then passed into the prepareAndExecute() function along with the $card_id variable and fetch type string.  In this case, prepareAndExecute is set to a variable because the function will return a value (the data from the fetch()).
+
+### Update Card Information
+
+```php
+if (!empty($question) && !empty($answer)) {
+    if (isset($_GET['card_id'])) {
+        $sql = "UPDATE `$setName` SET question = ?, answer = ? WHERE card_id = ?";
+        prepareAndExecute($sql, array($question, $answer, $card_id));
+    }
+```
+
+In this example, first the input fields are checked if they are empty.  If they aren't empty, then there is a check to see if ```card_id``` is set, if it is then like the example before, the card is being edited and, upon submit, the card should be updated with the new data.  The SQL statement written is the code needed to perform the update and is performed after it is prepared and executed from the prepareAndExecute() function.
+
+###  Delete Flashcard Set
+
+When deleting a flashcard set, two queries need to be performed:
+```php
+if (isset($_POST['delete'])) {
+    $sql = "DELETE FROM flashcard_set WHERE set_id = ?";
+    prepareAndExecute($sql, array($set_id));
+
+    $sql = "DROP TABLE `$setName`";
+    prepareAndExecute($sql, array());
+}
+```
+
+In this example, if ```delete``` is posted (if the delete form is submitted), the entry from the flashcard_set is removed then another query is performed that drops the card set table.

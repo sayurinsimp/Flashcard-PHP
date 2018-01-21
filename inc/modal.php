@@ -1,12 +1,11 @@
 <?php 
+  require('./config/functions.php');
     if (isset($_POST['delete'])) {
         $sql = "DELETE FROM flashcard_set WHERE set_id = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$set_id]);
+        prepareAndExecute($sql, array($set_id)); // $set_id is defined in the page that uses this modal.
 
         $sql = "DROP TABLE `$setName`";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
+        prepareAndExecute($sql, array());
 
         header('Location: ' . 'index.php' . '');
     }
