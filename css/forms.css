@@ -1,0 +1,16 @@
+.form {
+    max-width: 485px;
+    margin: auto;
+}
+
+.form-btns {
+    display: flex;
+}
+
+.form-btns__cancel {
+    margin-left: 5px;
+}
+
+.form-btns__delete {
+    margin-left: auto;
+}

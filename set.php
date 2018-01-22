@@ -16,19 +16,21 @@
     </div>
     <div class="cards">
         <?php foreach($cards as $card): ?>
-        <div class="card">
+        <div class="card show_answer">
             <div class="card__edit">
                 <a href="add-edit.php?set_id=<?php echo $set_id; ?>&amp;card_id=<?php echo $card['card_id']; ?>">Edit</a>
             </div>
-            <div class="card-body text-center">
+            <div class="card-body">
                 <p class="card-text question"><?php echo $card['question']; ?></p>
                 <p class="card-text answer"><?php echo $card['answer']; ?></p>
-                <button type="button" class="btn btn-primary card__btn">Show Answer</button>
             </div>
         </div>
         <?php endforeach; ?>
         <div class="card add-card">
-            <a href="add-edit.php?set_id=<?php echo $set_id; ?>" class="add-btn btn btn-secondary">Add Card</a>
+            <a href="add-edit.php?set_id=<?php echo $set_id; ?>" class="text-muted">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Add Card
+            </a>
         </div>
     </div>
     <div class="my-3">

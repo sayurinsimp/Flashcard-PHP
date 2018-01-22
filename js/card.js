@@ -1,24 +1,36 @@
 const $card = $('.card');
-const $cardBtn = $('.card__btn');
 const $answer = $('.answer');
 const $question = $('.question');
-let showAnswer = false;
+const $cardEdit = $('.card__edit');
 
-$answer.hide(); // hide card answers
+$answer.hide();
+$cardEdit.hide();
 
-$cardBtn.on('click', function(){
-    const $cardClicked = $(this).parent().parent();
-    const $btnClicked = $(this);
-    const btnText = $(this).text();
+$card.on('click', function(e){
+    // Don't toggle show/hide if edit clicked
+    if ($(e.target).is('a')) {
+        return;
+    }
+    const $cardClicked = $(this);
+    const $cardQuestion = $(this).find($question);
+    const $cardAnswer = $(this).find($answer);
+    toggleElements($cardClicked, $cardQuestion, $cardAnswer);
+});
 
-    $cardClicked.toggleClass('showing_question');
-    
-    $(this).text(btnText === 'Show Answer' ? 'Show Question' : 'Show Answer');
+/**
+ * Toggle edit button on card
+ */
+$card.hover(function(){
+    $(this).find($cardEdit).toggle();
+});
 
-    $cardClicked.hasClass('showing_question') ? showAndHideChild($btnClicked, $answer, $question) : showAndHideChild($btnClicked, $question, $answer);
-})
-
-function showAndHideChild(clicked, showElement, hideElement) {
-    clicked.parent().find(showElement).show();
-    clicked.parent().find(hideElement).hide();
+/**
+ * Toggle hide and show elements
+ * @param {Element} card = the card clicked
+ * @param {Element} q = the question element
+ * @param {Element} a = the answer element
+ */
+function toggleElements(card, q, a) {
+    card.hasClass('show_answer') && (q.hide(), a.show()) || (q.show(), a.hide());
+    card.toggleClass('show_answer');
 }

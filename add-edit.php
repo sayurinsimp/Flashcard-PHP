@@ -3,6 +3,7 @@
     require('./config/query.php');
     require('./config/functions.php');
 
+    $pageTitle = 'Add Card';
     $msg = '';
     $question_value = '';
     $answer_value = '';
@@ -12,6 +13,7 @@
         $card_id = htmlspecialchars($_GET['card_id']);
         $sql = "SELECT * FROM `$setName` WHERE card_id = ?";
         $card = prepareAndExecute($sql, array($card_id), 'fetch');
+        $pageTitle = 'Edit Card';
         $question_value = $card['question'];
         $answer_value = $card['answer'];
     }
@@ -44,7 +46,27 @@
 
 <?php include('./inc/header.php'); ?>
 
-    <h1>Edit Card</h1>
-    <?php include('./inc/form.php'); ?>
+    <h1 class="text-center"><?php echo $pageTitle; ?></h1>
+    <?php if ($msg != ''):  ?>
+        <div class="alert alert-danger"><?php echo $msg; ?></div>
+    <?php endif; ?>
+    <form class="form add-edit" method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" class="form">
+        <div class="form-group">
+            <label for="user_question">Question</label>
+            <input value="<?php  echo $question_value; ?>" type="text" name="question" id="user_question" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="user_answer">Answer</label>
+            <input value="<?php echo $answer_value; ?>" type="text" name="answer" id="user_answer" class="form-control">
+        </div>
+        <div class="form-btns">
+            <input type="submit" name="submit" value="<?php echo isset($card_id) ? 'Update' : 'Submit' ?>" class="btn btn-primary">
+            <a class="btn btn-secondary form-btns__cancel" href="set.php?set_id=<?php echo $set_id; ?>">Cancel</a>
+            <!-- Only show delete button when on edit.php -->
+            <?php if(isset($card_id)): ?>
+                <input type="submit" name="delete" value="Delete" class="btn btn-danger form-btns__delete">
+            <?php endif; ?>
+        </div>
+    </form>
 
 <?php include('./inc/footer.php'); ?>

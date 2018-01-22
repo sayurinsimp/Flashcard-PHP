@@ -3,6 +3,7 @@
     require('./config/functions.php');
     $pageTitle = "Make New Set";
     $href = "index.php";
+    $msg = '';
 
     // If set_id exist, set name is being edited
     if (isset($_GET['set_id'])) {
@@ -39,7 +40,7 @@
             }
             
         } else {
-            echo "ENTER A SET NAME";
+            $msg = 'Please fill in all fields';
         }
     }
 ?>
@@ -47,6 +48,9 @@
 <?php include('./inc/header.php'); ?>
 
     <h1 class="text-center"><?php echo $pageTitle ?></h1>
+    <?php if ($msg != ''):  ?>
+        <div class="alert alert-danger"><?php echo $msg; ?></div>
+    <?php endif; ?>
     <div class="container">
         <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>" class="form">
             <div class="form-group">
