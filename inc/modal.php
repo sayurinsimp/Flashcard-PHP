@@ -13,9 +13,11 @@
 
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-danger delete-btn" data-toggle="modal" data-target="#delete-modal">
-            Delete Set
-</button>
+<div class="modal-trigger text-center">
+  <button type="button" class="btn btn-danger mb-4" data-toggle="modal" data-target="#delete-modal">
+              Delete Set
+  </button>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="Delete Flashcard Set" aria-hidden="true">

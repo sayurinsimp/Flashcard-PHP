@@ -1,5 +1,18 @@
-.flashcard-list {
+/****** INDEX.PHP ******/
+.main {
+    margin: 30px auto;
+}
+
+.main__flashcard-list {
     max-width: 540px;
     margin: auto;
 }
 
+.main__add-set {
+    font-size: 1.2rem;
+}
+
+.main__about {
+    margin: 80px auto 10px auto;
+    max-width: 540px;
+}

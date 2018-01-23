@@ -5,12 +5,12 @@
 			<p class="footer-content__name">Xavier Trinidad 2018</p>
 			<ul class="footer-content__list">
 				<li>
-					<a href="#">
+					<a href="mailto:xmtrinidad@gmail.com">
 						<i class="fa fa-envelope-o" aria-hidden="true"></i>
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="https://github.com/xmtrinidad">
 						<i class="fa fa-github" aria-hidden="true"></i>
 					</a>
 				</li>

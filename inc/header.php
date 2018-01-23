@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://use.fontawesome.com/a25306efbe.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/sticky-footer.css">
     <link rel="stylesheet" href="css/cards.css">
     <link rel="stylesheet" href="css/forms.css">
@@ -24,7 +25,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="index.php">Flashcard List <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
@@ -33,4 +34,4 @@
             </ul>
         </div>
     </nav>
-    <div class="container">
+    <div class="container main">

@@ -12,6 +12,7 @@ An overview of basic PDO features can be found from [Traversy Media](https://www
 [PDO Query](#pdo-query)       
 [Prepared Statements](#prepared-statements)                 
 [CRUD Examples](#crud-examples)                 
+[Conclusion](#conclusion)                 
 
 ## Goals
 
@@ -251,3 +252,9 @@ if (isset($_POST['delete'])) {
 ```
 
 In this example, if ```delete``` is posted (if the delete form is submitted), the entry from the flashcard_set is removed then another query is performed that drops the card set table.
+
+## Conclusion
+
+As I add some basic styles, I am looking for opportunities to refactor.  I am also researching more on PDO to see what else I can do to improve this project.
+
+One area I could improve is to hide/show forms on the index.php and set.php pages.  Rather than redirecting to pages where card and set information can be entered, I could use JavaScript/jQuery to hide and show forms based on button clicks.  This may be something I do in the future or in another iteration of this project.
