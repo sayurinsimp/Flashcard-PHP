@@ -1,7 +1,9 @@
 const $card = $('.card');
-const $answer = $('.answer');
-const $question = $('.question');
+const $answer = $('.answer'); // Card answer
+const $question = $('.question'); // Card question
 const $cardEdit = $('.card__edit');
+const $addCardBtn = $('.add-card');
+const $addCardForm = $('.card:last-child');
 
 $answer.hide();
 $cardEdit.hide();
@@ -22,6 +24,13 @@ $card.on('click', function(e){
  */
 $card.hover(function(){
     $(this).find($cardEdit).toggle();
+});
+
+/**
+ * Show form for adding card to set
+ */
+$addCardBtn.on('click', function(){
+    $addCardForm.show();
 });
 
 /**
