@@ -10,7 +10,7 @@ $cardEdit.hide();
 
 $card.on('click', function(e){
     // Don't toggle show/hide if edit clicked
-    if ($(e.target).is('a')) {
+    if ($(e.target).is('button')) {
         return;
     }
     const $cardClicked = $(this);
@@ -26,11 +26,19 @@ $card.hover(function(){
     $(this).find($cardEdit).toggle();
 });
 
+$cardEdit.on('click', function(){
+    const $clickedCard = $(this).parent();
+    const $editCard = $(this).parent().next();
+    $clickedCard.toggle();
+    $editCard.toggle();
+});
+
 /**
  * Show form for adding card to set
  */
 $addCardBtn.on('click', function(){
     $addCardForm.show();
+    $(this).hide();
 });
 
 /**

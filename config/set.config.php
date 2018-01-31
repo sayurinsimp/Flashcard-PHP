@@ -3,6 +3,7 @@
     if (isset($_POST['submit_set_name']) || isset($_POST['submit_card'])) {
         require('config.php');
         require('query.php');
+        // Card is being edited
         if (isset($_POST['submit_set_name'])) { 
             $editedName = htmlspecialchars($_POST['set_name']);
             // A set must have name
@@ -18,7 +19,9 @@
             } else {
                 header('Location: ' . '../set.php?set_id=' . $set_id . '&fields=empty');
             }
-        } else if (isset($_POST['submit_card'])) {
+        }
+        // New card is being added 
+        else if (isset($_POST['submit_card'])) {
                 $question = htmlspecialchars($_POST['question']);
                 $answer = htmlspecialchars($_POST['answer']);
             if (!empty($question) && !empty($answer)) {

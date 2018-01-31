@@ -7,6 +7,6 @@
     margin-left: auto;
 }
 
-.add-set-form {
+.edit-set-form, .add-set-form {
     display: none;
 }

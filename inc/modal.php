@@ -1,17 +1,3 @@
-<?php 
-  require('./config/functions.php');
-    if (isset($_POST['delete'])) {
-        $sql = "DELETE FROM flashcard_set WHERE set_id = ?";
-        prepareAndExecute($sql, array($set_id)); // $set_id is defined in the page that uses this modal.
-
-        $sql = "DROP TABLE `$setName`";
-        prepareAndExecute($sql, array());
-
-        header('Location: ' . 'index.php' . '');
-    }
-?>
-
-
 <!-- Button trigger modal -->
 <div class="modal-trigger text-center">
   <button type="button" class="btn btn-danger mb-4" data-toggle="modal" data-target="#delete-modal">
@@ -34,8 +20,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <form method="POST">
-            <button name="delete" class="btn btn-danger">Delete</button>
+        <form action="config/delete.config.php?set_id=<?php echo $set_id; ?>" method="POST">
+            <button type="submit" name="delete" class="btn btn-danger">Delete</button>
+            <input type="hidden" name="set_name" value="<?php echo $setName; ?>">
         </form>
       </div>
     </div>
