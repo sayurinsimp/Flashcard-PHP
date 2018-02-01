@@ -13,7 +13,9 @@
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$edit_question, $edit_answer, $card_id]);
             header('Location: ' . '../set.php?set_id=' . $set_id);
+            exit();
         } else {
             header('Location: ' . '../set.php?set_id=' . $set_id . '&fields=empty');
+            exit();
         }
     }

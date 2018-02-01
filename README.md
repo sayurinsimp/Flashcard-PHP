@@ -258,3 +258,25 @@ In this example, if ```delete``` is posted (if the delete form is submitted), th
 As I add some basic styles, I am looking for opportunities to refactor.  I am also researching more on PDO to see what else I can do to improve this project.
 
 One area I could improve is to hide/show forms on the index.php and set.php pages.  Rather than redirecting to pages where card and set information can be entered, I could use JavaScript/jQuery to hide and show forms based on button clicks.  This may be something I do in the future or in another iteration of this project.
+
+## Update 2/1
+
+Over the past month I've been working on this project along with other projects, while continuing to learn more about PHP.  I have changed several things in this application, below is a list of those changes:
+
+*  Got rid of the prepareAndExecute() function because it interfered with other refactoring and it only saved a few lines of code.
+
+* Cut down on the amount of redirection.  Adding a new set, adding a new card, and editing a card no longer go to separate pages.  Instead they can be submitted from the current page they are on.
+
+* Moved PHP code that handled form submits to their own files.
+
+As always, this project can be improved and refactored to be more concise.  I will look for opportunities to refactor while I continue you on to my next goal.
+
+## Experimenting with the Database
+
+My next goal is to create a branch from the current version and experiment with a different database schema.
+
+As I've been learning PHP, I've also been learning SQL.  Something I've learned recently is the concept of FOREIGN KEYS and CASCADE.  Using these two concepts, I'm thinking that, instead of creating separate tables for each new flash card set, I can make one big Cards table and connect them with their set_names using JOINS.
+
+I will document the process as I figure out exactly how I'm going to go about it.
+
+

@@ -16,8 +16,10 @@
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute([$editedName, $set_id]);
                 header('Location: ' . '../set.php?set_id=' . $set_id);
+                exit();
             } else {
                 header('Location: ' . '../set.php?set_id=' . $set_id . '&fields=empty');
+                exit();
             }
         }
         // New card is being added 
@@ -29,10 +31,13 @@
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute([$question, $answer]);
                 header('Location: ' . '../set.php?set_id=' . $set_id);
+                exit();
             } else {
                 header('Location: ' . '../set.php?set_id=' . $set_id . '&fields=empty');
+                exit();
             }
         }
     } else {
         header('Location: ' . '../index.php');
+        exit();
     }

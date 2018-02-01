@@ -14,8 +14,10 @@ if (isset($_POST['submit'])) {
         $stmt = $pdo->prepare($sql);
         $stmt->execute([]);
         header('Location: ' . '../index.php');
+        exit();
         
     } else {
         header('Location: ' . '../index.php?fields=empty');
+        exit();
     }
 }
