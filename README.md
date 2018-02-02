@@ -279,4 +279,41 @@ As I've been learning PHP, I've also been learning SQL.  Something I've learned 
 
 I will document the process as I figure out exactly how I'm going to go about it.
 
+### Recreating the tables
+
+I dropped the tables from the working branch and set up new tables using SQL:
+
+```sql
+CREATE TABLE flashcard_set (
+    set_id INT AUTO_INCREMENT PRIMARY KEY,
+    set_name VARCHAR(255)
+);
+
+CREATE TABLE cards (
+    card_id INT AUTO_INCREMENT PRIMARY KEY,
+    question VARCHAR(255),
+    answer VARCHAR(255),
+    set_id INT,
+    FOREIGN KEY(set_id)
+        REFERENCES flashcard_set(set_id)
+        ON DELETE CASCADE
+);
+```
+
+The ```flashcard_set``` table is the same as before.  The main change is in the ```cards``` table, which will hold all cards created in the application.
+
+As before, a card has a **card_id**, **question**, and **answer** column and now has a ```set_id``` column, which is used as the foreign key that references the ```flashcard_set``` table's ```set_id```.  If a flashcard set is deleted, this change will **CASCADE** and delete all cards where the card's set id matches the flashcard set id.
+
+This is a much more efficient way of removing items from the database.  Before, I was submitting two queries, one to delete the card table and another to remove the item from the flashcard set table.  Now, all I need is one query to delete the flashcard set and all cards associated with that set will be deleted as well.
+
+The next step is to refactor the PHP code
+
+## Update 2/2
+
+After experimenting with the database, it turns out I didn't need to use a JOIN to get the table information.  I could have used it, but it was giving me back results I didn't need (like the entire set_name column, when all I really needed is just one set_name row).
+
+Using this new database schema, I was able to remove several queries that created tables when a new card set was created.  The same applies for deleting a set; as I mentioned earlier, I used a FOREIGN KEY in the cards set that references the set_id in the flashcard_set table.
+
+
+
 

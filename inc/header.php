@@ -1,3 +1,9 @@
+<?php 
+    require('./config/config.php');
+    $stmt = $pdo->query("SELECT * FROM flashcard_set");
+    $sets = $stmt->fetchAll();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,12 +31,11 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
+                <?php foreach ($sets as $set): ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php">Flashcard List <span class="sr-only">(current)</span></a>
+                    <a href="set.php?set_id=<?php echo $set['set_id']; ?>" class="nav-link"><?php  echo $set['set_name']; ?></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="new-set.php">New Set</a>
-                </li>
+                <?php endforeach; ?>
             </ul>
         </div>
     </nav>

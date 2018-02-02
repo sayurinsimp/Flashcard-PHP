@@ -9,7 +9,7 @@
         $edit_answer = htmlspecialchars($_POST['edit_answer']);
 
         if (!empty($edit_question) && !empty($edit_answer)) {
-            $sql = "UPDATE `$set_name` SET question = ?, answer = ? WHERE card_id = ?";
+            $sql = "UPDATE cards SET question = ?, answer = ? WHERE card_id = ?";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$edit_question, $edit_answer, $card_id]);
             header('Location: ' . '../set.php?set_id=' . $set_id);
