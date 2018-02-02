@@ -1,7 +1,18 @@
 <?php
     require('config/config.php');
-    require('config/query.php');
-    $stmt = $pdo->query("SELECT * FROM `$setName`");
+    $set_id = htmlspecialchars($_GET['set_id']);
+
+    // Get flashcard_set title
+    $sql = "SELECT set_name FROM flashcard_set WHERE set_id = ?;";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$set_id]);
+    $result = $stmt->fetch();
+    $set_name = $result["set_name"];
+
+    // Get cards
+    $sql = "SELECT * FROM cards WHERE set_id = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$set_id]);
     $cards = $stmt->fetchAll();
     
 ?>
@@ -9,15 +20,13 @@
 <?php include('./inc/header.php'); ?>
     <div class="text-center mt-2 mb-3">
         <h1 class="set-title">
-            <?php echo $setName; ?>
+            <?php echo $set_name; ?>
         </h1>
         
         <!-- Empty Fields Message -->
-        <?php if (isset($_GET['fields'])):  ?>
-            <div class="alert alert-danger">
-                <span>Please fill in all fields.</span>
-            </div>
-        <?php endif; ?>
+
+        <?php include('inc/empty-fields.php'); ?>
+        
         <!-- /Empty Fields Message -->
 
         <!-- Edit Set Name Form -->

@@ -8,10 +8,6 @@
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$set_id]);
 
-        $sql = "DROP TABLE `$set_name`";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([]);
-
         header('Location: ' . '../index.php' . '');
         exit();
     }

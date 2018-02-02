@@ -6,13 +6,7 @@ if (isset($_POST['submit'])) {
         $sql = "INSERT INTO flashcard_set(set_name) VALUES(?)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$posted_set_name]);
-
-        $sql ="CREATE TABLE `$posted_set_name`(
-        card_id INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
-        question VARCHAR( 150 ) NOT NULL, 
-        answer VARCHAR( 150 ) NOT NULL);";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([]);
+        
         header('Location: ' . '../index.php');
         exit();
         
