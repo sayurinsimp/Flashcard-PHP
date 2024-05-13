@@ -1,7 +1,7 @@
 <?php
     $host = 'localhost';
     $user = 'root';
-    $password = 'cELrzWbzad3dAHot';
+    $password = '';
     $dbname = 'flashcards';
 
     // Set DSN (Data Source Name)
