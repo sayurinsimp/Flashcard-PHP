@@ -1,5 +1,10 @@
+<!-- HEADER START -->
+
 <?php include('./inc/header.php'); ?>
 
+<!-- HEADER END -->
+
+<!-- LISTS FLASHCARD DECKS -->
     <h1 class="text-center">Flashcard List</h1>
     <div class="list-group main__flashcard-list">
         <?php foreach ($sets as $set): ?>
